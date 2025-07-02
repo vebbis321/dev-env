@@ -53,10 +53,17 @@ sudo dnf install -y intel-microcode
 
 ### 2) Prepare the machine for the setup script
 
-1. add user.js from https://github.com/yokoffing/Betterfox
-2. sync firefox
-3. install git and password manager `sudo dnf5 install git keepassxc`
-4. setup ssh in git in the browser and in keepassxc
-5. clone the setup script
+1. setup your default directories:
+
+```bash
+mkdir $HOME/repos
+cd $HOME/repos
+mkdir assembly  bash  c  js_ts  keyboards  python
+```
+2. setup your passwords directory
+3. add user.js from https://github.com/yokoffing/Betterfox
+4. sync firefox
+5. install git and password manager `sudo dnf5 install git keepassxc`
+6. setup ssh in git in the browser and in keepassxc
 
 ### 3) Run the script for my dev-env (based on the primeagen's dev-env)
