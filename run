@@ -1,3 +1,47 @@
 #!/usr/bin/env bash
 
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd) # get the script dir
+filter="" # filter is the firs arg
+dry="0"
+
+while [[ $# > 0 ]]; do
+    if [[ $1 == "--dry" ]]; then
+        dry="1"
+    else
+        filter="$1"
+    fi
+    shift
+done
+
+log() {
+    if [[ $dry == "1" ]]; then # if we have a dry run
+        echo "[DRY_RUN]: $@" # log everything with indication that it's a dry run
+    else
+        echo "$@" # otherwise log everything
+    fi
+}
+
+execute() {
+    log "execute $@"
+    if [[ $dry == "1" ]]; then # if we have a dry run
+        return # don't run the scripts
+    fi
+    "$@" # otherwise run them
+}
+
+log "$script_dir -- $filter"
+
+cd $script_dir # cd into it, the process is cd into it, so we're not - unless you source it, so don't source it!
+scripts=$(find ./runs -maxdepth 1 -mindepth 1 -executable -type f) # finds every file in the runs that's executable
+
+for script in $scripts; do
+    # if the single script we're looking at does not contain the filter. 
+    # we're essentially filtering away what we don't want
+    if echo "$script" | grep -qv "$filter"; then         
+        log "filtering $script"
+        continue
+    fi
+
+    execute ./$script
+done
 

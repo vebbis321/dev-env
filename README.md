@@ -1,6 +1,6 @@
 # Fedora 42 Sway Spin
 
-My dotfiles and startup script for fedora 42 sway spin.
+How I setup fedora 42 sway spin with my dev env
 
 ## Steps:
 
@@ -50,3 +50,13 @@ sudo dnf swap libva-intel-media-driver intel-media-driver --allowerasing
 sudo dnf install libva-intel-driver
 sudo dnf install -y intel-microcode
 ```
+
+### 2) Prepare the machine for the setup script
+
+1. add user.js from https://github.com/yokoffing/Betterfox
+2. sync firefox
+3. install git and password manager `sudo dnf5 install git keepassxc`
+4. setup ssh in git in the browser and in keepassxc
+5. clone the setup script
+
+### 3) Run the script for my dev-env (based on the primeagen's dev-env)
