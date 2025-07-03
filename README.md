@@ -59,6 +59,9 @@ sudo dnf install -y intel-microcode
 mkdir $HOME/repos
 cd $HOME/repos
 mkdir assembly  bash  c  js_ts  keyboards  python
+cd
+cd $HOME/.local
+mkdir scripts
 ```
 2. setup your passwords directory
 3. add user.js from https://github.com/yokoffing/Betterfox
