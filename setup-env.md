@@ -60,11 +60,21 @@ cd
 cd $HOME/.local
 mkdir scripts
 ```
-2. setup your passwords directory
-3. add user.js from https://github.com/yokoffing/Betterfox
-4. sync firefox
-5. install git and password manager `sudo dnf5 install git keepassxc`
-6. setup ssh in git in the browser and in keepassxc
+
+2. add user.js from https://github.com/yokoffing/Betterfox
+3. install syncthing and setup syncthing:
+
+```bash
+sudo dnf install syncthing
+sudo systemctl start syncthing@$(whoami)
+systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing@$(whoami)
+```
+
+4. install git and password manager `sudo dnf5 install git keepassxc`
+5. setup your passwords directory
+6. setup keepassxc
+7. setup ssh in git in the browser and in keepassxc
+8. sync firefox
 
 ### 3) run ./install_libs and ./install_env_libs
 

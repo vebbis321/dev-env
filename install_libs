@@ -12,11 +12,6 @@ sudo dnf install brave-browser
 sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
 sudo dnf install mullvad-vpn
 
-# syncthing
-sudo dnf install syncthing
-sudo systemctl start syncthing@$(whoami)
-systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing@$(whoami)
-
 # programming languages
 
 # zig
