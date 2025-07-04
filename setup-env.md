@@ -27,6 +27,7 @@ sudo dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-
 sudo dnf group upgrade core
 
 # enbale flatpak
+sudo dnf install flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-modify --enable flathub
 
@@ -77,6 +78,6 @@ systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing
 7. sync firefox
 8. setup ssh in git in the browser and in keepassxc
 
-### 3) run ./install_libs and ./install_env_libs
+### 4) add the .dotfiles with ./update-env (based on the primeagen's dev-env)
+### 5) run ./install_libs and ./install_env_libs
 
-### 4) install the configs for the env libs with ./update-env (based on the primeagen's dev-env)
