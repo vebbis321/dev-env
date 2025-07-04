@@ -46,7 +46,6 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 # intel stuff. don't paste these if you don't have intel
 sudo dnf swap libva-intel-media-driver intel-media-driver --allowerasing
 sudo dnf install libva-intel-driver
-sudo dnf install -y intel-microcode
 ```
 
 ### 2) Prepare the machine for the setup script

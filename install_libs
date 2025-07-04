@@ -16,3 +16,6 @@ sudo dnf install mullvad-vpn
 sudo dnf install syncthing
 sudo systemctl start syncthing@$(whoami)
 systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing@$(whoami)
+
+# programming languages
+sudo dnf install zig
