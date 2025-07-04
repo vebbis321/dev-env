@@ -18,4 +18,8 @@ sudo systemctl start syncthing@$(whoami)
 systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing@$(whoami)
 
 # programming languages
-sudo dnf install zig
+
+# zig
+curl https://zigup.dev/install.sh | bash
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

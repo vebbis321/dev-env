@@ -7,3 +7,28 @@ sudo dnf install neovim
 # tmux
 sudo dnf install tmux
 
+# ghostty
+sudo dnf install git gcc make SDL2-devel fontconfig-devel pango-devel
+sudo dnf install golang
+
+git clone https://github.com/wez/ghostty
+cd ghostty
+make
+
+sudo cp ghostty /usr/local/bin/
+
+ghostty --version # just for confirmation
+
+# zsh
+sudo dnf install zsh
+zsh --version
+sudo chsh $USER
+echo $SHELL
+
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+
+
+
