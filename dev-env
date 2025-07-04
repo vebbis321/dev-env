@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd) # get the script dir
-dry="1"
+dry="0"
 
-# i want to run dry by default
 while [[ $# > 0 ]]; do
-    if [[ $1 == "--run" ]]; then
-        dry="0"
+    if [[ $1 == "--dry" ]]; then
+        dry="1"
     fi
     shift
 done
@@ -39,7 +38,6 @@ copy_dir() {
     for dir in $dirs; do
         execute rm -rf $to/$dir
         execute cp -r $dir $to/$dir
-
     done
 
     popd > /dev/null # we don't want the output
@@ -53,6 +51,13 @@ copy_file() {
     execute rm $to/$name
     execute cp -r $from $to/$name
 }
+
+
+root_files=(".zshrc" ".tmux.conf")
+
+for file in $root_files; do
+    echo $file
+done
 
 copy_dir .config $XDG_CONFIG_HOME
 copy_dir .local $HOME/.local
