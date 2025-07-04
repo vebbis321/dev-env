@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e # stops the script if anything fails
+
+sudo dnf install vlc gimp qbittorrent calibre uxplay
+
+# brave
+sudo dnf install dnf-plugins-core
+sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+sudo dnf install brave-browser
+
+# mullvad
+sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
+sudo dnf install mullvad-vpn
+
+# syncthing
+sudo dnf install syncthing
+sudo systemctl start syncthing@$(whoami)
+systemctl --user is-enabled syncthing.service || sudo systemctl enable syncthing@$(whoami)
