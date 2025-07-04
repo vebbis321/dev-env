@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -e # stops the script if anything fails
 
-sudo dnf install vlc gimp qbittorrent calibre uxplay
+sudo dnf install vlc gimp qbittorrent calibre uxplay    
+
+# obs
+flatpak install flathub com.obsproject.Studio
 
 # brave
 sudo dnf install dnf-plugins-core
