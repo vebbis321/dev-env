@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sudo dnf install gtk4-devel gtk4-layer-shell-devel zig libadwaita-devel blueprint-compiler gettext
+
+git clone git@github.com:ghostty-org/ghostty.git $HOME/src
+cd $HOME/src/ghostty
+
+zig build -p $HOME/.local -Doptimize=ReleaseFast
+

@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-curl https://zigup.dev/install.sh | bash
-
