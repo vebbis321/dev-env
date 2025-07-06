@@ -1,7 +1,4 @@
-# Fedora 42 Sway Spin
+# dev-env
 
-**How I setup fedora 42 sway spin with my dev-env**
-
-Head to [setup-env](setup-env.md) when configuring a new machine, otherwise use `update-env` for managing your
-dotfiles.
+**dev-env for fedora 42 sway spin**
 
