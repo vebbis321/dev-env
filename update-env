@@ -52,12 +52,20 @@ copy_file() {
     execute cp -r $from $to/$name
 }
 
-
+# root files
 root_files=(".zshrc" ".zsh_profile" ".tmux.conf" ".gitconfig")
-
 for file in "${root_files[@]}"; do
     copy_file env/"$file" "$HOME"
 done
 
+# .config
 copy_dir env/.config $HOME/.config
-copy_dir env/.local $HOME/.local
+
+# scripts
+cd $script_dir
+scripts=$(find env/scripts -maxdepth 1 -mindepth 1 -executable -type f)
+
+for script in $scripts; do
+    copy_file "$script" "$HOME/.local/bin"
+done
+
