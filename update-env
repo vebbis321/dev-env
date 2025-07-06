@@ -53,7 +53,7 @@ copy_file() {
 }
 
 
-root_files=(".zshrc" ".tmux.conf" ".gitconfig")
+root_files=(".zshrc" ".zsh_profile" ".tmux.conf" ".gitconfig")
 
 for file in "${root_files[@]}"; do
     copy_file env/"$file" "$HOME"

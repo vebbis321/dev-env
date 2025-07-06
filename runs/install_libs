@@ -14,10 +14,3 @@ sudo dnf install brave-browser
 # mullvad
 sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
 sudo dnf install mullvad-vpn
-
-# programming languages
-
-# zig
-curl https://zigup.dev/install.sh | bash
-# rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

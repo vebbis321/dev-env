@@ -1,0 +1,9 @@
+
+# zig
+export PATH="$HOME/zig-linux-x86_64-0.14.0:$PATH"
+
+# scripts
+export PATH="$HOME/.local/scripts"
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
