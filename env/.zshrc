@@ -3,7 +3,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
 
-source $ZSH/oh-my-zsh.sh
+source $ZSH/.oh-my-zsh.sh
 source /usr/share/fzf/shell/key-bindings.zsh
 
 #alias

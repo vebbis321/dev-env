@@ -62,7 +62,6 @@ done
 copy_dir env/.config $HOME/.config
 
 # scripts
-cd $script_dir
 scripts=$(find env/scripts -maxdepth 1 -mindepth 1 -executable -type f)
 
 for script in $scripts; do
