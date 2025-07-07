@@ -15,7 +15,7 @@ key=$(find "$HOME/.ssh" -maxdepth 1 -type f -name 'id_*' ! -name '*.pub' | head 
 # If a key is found, pass it to keychain
 if [[ -n "$key" ]]; then
   eval "$(keychain --eval --quiet "$key")"
-  echo "$key"
+  echo "ssh-key loaded"
 fi
 
 # NVM
