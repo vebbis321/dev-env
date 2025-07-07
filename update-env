@@ -53,9 +53,9 @@ copy_file() {
 }
 
 # root files
-root_files=(".zshrc" ".zsh_profile" ".tmux.conf" ".gitconfig")
-for file in "${root_files[@]}"; do
-    copy_file env/"$file" "$HOME"
+root_files=$(find env -maxdepth 1 -mindepth 1 -type f)
+for file in $root_files; do
+    copy_file "$file" "$HOME"
 done
 
 # .config
