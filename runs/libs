@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo dnf install gimp calibre uxplay fzf ripgrep
+sudo dnf install gimp calibre uxplay fzf ripgrep keychain
 
 # vscodium
 sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
