@@ -1,0 +1,21 @@
+theme = Kanagawa Dragon
+background = #000000
+background-opacity = 0.75
+background-blur-radius = 6
+foreground = #c5c9c5
+
+font-family = Hack Nerd Font Mono
+font-size = 22
+
+macos-titlebar-style = hidden
+gtk-titlebar = false
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+auto-update = check
+
+confirm-close-surface = false
+shell-integration-features = no-cursor
+
+keybind = cmd+g=reload_config
