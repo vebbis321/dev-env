@@ -5,7 +5,7 @@ background-blur-radius = 6
 foreground = #c5c9c5
 
 font-family = Hack Nerd Font Mono
-font-size = 18
+font-size = 16
 
 macos-titlebar-style = hidden
 gtk-titlebar = false
