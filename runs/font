@@ -1,3 +1,10 @@
+#!/usr/bin/env bash
 
+wget -O ~/Downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
 
+mkdir -p ~/.local/share/fonts
+unzip -d ~/.local/share/fonts ~/Downloads/Hack.zip
 
+fc-cache -fv
+
+rm ~/Downloads/Hack.zip
