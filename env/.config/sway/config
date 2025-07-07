@@ -23,11 +23,12 @@ set $rofi_cmd rofi \
 output * bg "$HOME/Pictures/wallpaper.png" fill
 
 ### Idle configuration
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
+exec swayidle -w \
+    timeout 1800 'swaylock -f -c 000000' \
+    timeout 2100 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout 2700 'systemctl suspend' \
+    before-sleep 'swaylock -f -c 000000'
 
 ### Input configuration
 input "type:keyboard" {
@@ -60,6 +61,9 @@ exec_always "pkill kanshi; kanshi"
 #
 # Start a terminal
 bindsym $mod+space exec $term
+
+# firefox
+bindsym $mod+Shift+space exec firefox
 
 # Kill focused window
 bindsym $mod+Shift+q kill
