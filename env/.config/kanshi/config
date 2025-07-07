@@ -1,0 +1,24 @@
+# laptop only
+profile undocked {
+  output eDP-1 {
+    scale 1.5
+    position 0 0
+    enable
+  }
+}
+
+# home
+profile docked {
+  output eDP-1 {
+    scale 1.5
+    position 0 0
+    enable
+  }
+
+  output HDMI-A-1 {
+    scale 1
+    position 0 1476
+    enable
+  }
+}
+
