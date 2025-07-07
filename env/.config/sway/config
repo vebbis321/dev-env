@@ -6,6 +6,7 @@ set $up k
 set $right l
 set $term ghostty
 
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -34,6 +35,9 @@ input "type:keyboard" {
     xkb_variant mac
 }
 
+### Output configuration
+
+
 ### Autostart applications
 
 # always use wayland
@@ -46,7 +50,9 @@ exec_always {
     export OZONE_PLATFORM=wayland
     export NIXOS_OZONE_WL=1
 }
-exec_always kanshi
+
+# kanshi
+exec_always "pkill kanshi; kanshi"
 
 ### Key bindings
 #
@@ -136,9 +142,7 @@ bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
-# Note: workspaces can have any name you want, not just numbers.
-# We just use 1-10 as the default.
-#
+
 # Layout stuff:
 #
 # You can "split" the current object of your focus with
@@ -156,7 +160,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # Swap focus between the tiling area and the floating area
 bindsym $mod+t focus mode_toggle

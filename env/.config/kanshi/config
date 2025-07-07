@@ -1,24 +1,19 @@
-# laptop only
-profile undocked {
-  output eDP-1 {
-    scale 1.5
-    position 0 0
-    enable
-  }
+# When docked at home with external monitor
+profile home {
+    output eDP-1 {
+        scale 1.3
+        position 0,0
+    }
+    output HDMI-A-1 {
+        scale 1
+        position 1476,0
+    }
 }
-
-# home
-profile docked {
-  output eDP-1 {
-    scale 1.5
-    position 0 0
-    enable
-  }
-
-  output HDMI-A-1 {
-    scale 1
-    position 0 1476
-    enable
-  }
+# When undocked (just laptop)
+profile mobile {
+    output eDP-1 {
+        scale 1.3
+        position 0,0
+    }
 }
 
