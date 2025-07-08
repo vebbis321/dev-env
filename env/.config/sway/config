@@ -4,7 +4,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term ghostty
+
 
 
 # Your preferred application launcher
@@ -23,12 +23,11 @@ set $rofi_cmd rofi \
 output * bg "$HOME/Pictures/wallpaper.png" fill
 
 ### Idle configuration
-exec swayidle -w \
-    timeout 1800 'swaylock -f -c 000000' \
-    timeout 2100 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout 2700 'systemctl suspend' \
+exec_always {
+  swayidle -w \
+    timeout 2700 'swaylock -f -c 000000' \
     before-sleep 'swaylock -f -c 000000'
+}
 
 ### Input configuration
 input "type:keyboard" {
@@ -60,7 +59,8 @@ exec_always "pkill kanshi; kanshi"
 # Basics:
 #
 # Start a terminal
-bindsym $mod+space exec $term
+# bindsym $mod+space exec $term
+bindsym $mod+space exec bash -c 'gtk-launch com.mitchellh.ghostty.desktop || ~/.local/bin/ghostty'
 
 # firefox
 bindsym $mod+Shift+space exec firefox
@@ -171,7 +171,7 @@ bindsym $mod+t focus mode_toggle
 
 # Move focus to the parent container
 bindsym $mod+a focus parent
-#
+
 # Scratchpad:
 #
 # Sway has a "scratchpad", which is a bag of holding for windows.
@@ -207,6 +207,24 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Appearance:
+
+# class                 border  bground text    indicator child_border
+# client.focused          #B90E0A #B90E0A #FFFFFF #B90E0A   #B90E0A
+# client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
+# client.unfocused        #181616 #181616 #FFFFFF #181616   #181616 
+# client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
+# client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+#
+# client.background       #FFFFFF
+#
+# gaps inner 8
+# gaps outer 3
+
+# Configure the default border:
+default_border pixel 2
+
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
