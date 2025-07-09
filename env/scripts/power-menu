@@ -2,7 +2,7 @@
 
 actions=("suspend" "sleep" "shutdown" "reboot" "hibernate")
 
-chosen=$(printf "%s\n" "${actions[@]}" | rofi -dmenu -p "Select Wi-Fi")
+chosen=$(printf "%s\n" "${actions[@]}" | rofi -dmenu -p "Select action:")
 
 if [ -n "$chosen" ]; then
     systemctl "$chosen"
