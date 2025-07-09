@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+actions=("suspend" "sleep" "shutdown" "reboot" "hibernate")
+
+chosen=$(printf "%s\n" "${actions[@]}" | rofi -dmenu -p "Select Wi-Fi")
+
+if [ -n "$chosen" ]; then
+    systemctl "$chosen"
+fi

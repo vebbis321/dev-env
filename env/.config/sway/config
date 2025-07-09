@@ -5,8 +5,6 @@ set $down j
 set $up k
 set $right l
 
-
-
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -17,17 +15,22 @@ set $rofi_cmd rofi \
 # Shows a combined list of the applications with desktop files and
 # executables from PATH.
 # TODO: add window with the next release of rofi-wayland
-        set $menu $rofi_cmd -show drun -show-icons
+set $menu $rofi_cmd -show drun -show-icons
 
 # background
 output * bg "$HOME/Pictures/wallpaper.png" fill
 
 ### Idle configuration
-exec_always {
-  swayidle -w \
-    timeout 2700 'swaylock -f -c 000000' \
-    before-sleep 'swaylock -f -c 000000'
-}
+exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-3600} ST=${ST:-60} && \
+    swayidle -w \
+        timeout $LT 'swaylock -f' \
+        timeout $((LT + ST)) 'swaymsg "output * power off"' \
+                      resume 'swaymsg "output * power on"'  \
+        timeout $ST 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power off"' \
+             resume 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power on"'  \
+        before-sleep 'swaylock -f' \
+        lock 'swaylock -f' \
+        unlock 'pkill -xu "$USER" -SIGUSR1 swaylock'
 
 ### Input configuration
 input "type:keyboard" {
@@ -72,7 +75,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 
 # printscreen
-bindsym $mod+Print exec grimshot copy area
+bindsym Print exec grimshot copy area
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -110,7 +113,7 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-#
+
 # Workspaces:
 #
 # Send workspace 1 to the laptop screen
@@ -152,16 +155,6 @@ bindsym $mod+Shift+9 move container to workspace number 9
 
 # Layout stuff:
 #
-# You can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
-# respectively.
-bindsym $mod+b splith
-bindsym $mod+v splitv
-
-# Switch the current container between different layout styles
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
@@ -175,79 +168,47 @@ bindsym $mod+t focus mode_toggle
 # Move focus to the parent container
 bindsym $mod+a focus parent
 
-# Scratchpad:
-#
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-#
 # Resizing containers:
 #
 mode "resize" {
-# left will shrink the containers width
-# right will grow the containers width
-# up will shrink the containers height
-# down will grow the containers height
-    bindsym $left resize shrink width 10px
-        bindsym $down resize grow height 10px
-        bindsym $up resize shrink height 10px
-        bindsym $right resize grow width 10px
 
-# Ditto, with arrow keys
-        bindsym Left resize shrink width 10px
-        bindsym Down resize grow height 10px
-        bindsym Up resize shrink height 10px
-        bindsym Right resize grow width 10px
+    # Dynamic resize
+    bindsym $left exec "swaymsg resize grow left 10px || swaymsg resize shrink right 10px"
+    bindsym $right exec "swaymsg resize grow right 10px || swaymsg resize shrink left 10px"
+    bindsym $up exec "swaymsg resize grow up 10px || swaymsg resize shrink down 10px"
+    bindsym $down exec "swaymsg resize grow down 10px || swaymsg resize shrink up 10px"
 
-# Return to default mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
 # Appearance:
 
-# class                 border  bground text    indicator child_border
-# client.focused          #B90E0A #B90E0A #FFFFFF #B90E0A   #B90E0A
-# client.focused_inactive #8C8C8C #4C4C4C #FFFFFF #4C4C4C   #8C8C8C
-# client.unfocused        #181616 #181616 #FFFFFF #181616   #181616 
-# client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
-# client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
-#
-# client.background       #FFFFFF
-#
-# gaps inner 8
-# gaps outer 3
-
 # Configure the default border:
 default_border pixel 2
-
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
 #  - /etc/sway/config.d
 #  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
-#
-# If multiple directories contain the files with the same name, the later
-# directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
-# will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
-# or `/etc/sway/config.d/20-swayidle.conf`
-#
-# This mechanism permits overriding our default configuration per-system
-# (/etc) or per-user ($XDG_CONFIG_HOME) basis. Just create the file you
-# want to modify/override in the higher-level directory.
-#
-# For example, to disable the default bar from Fedora configs, you'll need to
-#     $ echo -n > "$HOME/.config/sway/config.d/90-bar.conf"
-#
-# Note the quoting, the $() and the arguments quoting. All the parts are equally
-# important to make the magic work. And if you want to learn the secret behind
-# the trick, it's all in the `wordexp(3)`.
-#
-include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
+include '$(/usr/libexec/sway/layered-include "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
+
+# now we can decide what we want from the fedora spin and what we don't want
+# this is all the files from: usr/share/sway/config.d/*.conf
+include "/usr/share/sway/config.d/50-rules-browser.conf"
+include "/usr/share/sway/config.d/50-rules-pavucontrol.conf"
+include "/usr/share/sway/config.d/50-rules-policykit-agent.conf"
+include "/usr/share/sway/config.d/60-bindings-brightness.conf"
+include "/usr/share/sway/config.d/60-bindings-media.conf"
+# include "/usr/share/sway/config.d/60-bindings-screenshot.conf"
+include "/usr/share/sway/config.d/60-bindings-volume.conf"
+include "/usr/share/sway/config.d/65-mode-passthrough.conf"
+include "/usr/share/sway/config.d/90-bar.conf"
+# include "/usr/share/sway/config.d/90-swayidle.conf"
+include "/usr/share/sway/config.d/95-autostart-policykit-agent.conf"
+include "/usr/share/sway/config.d/95-xdg-desktop-autostart.conf"
+include "/usr/share/sway/config.d/95-xdg-user-dirs.conf"
+
