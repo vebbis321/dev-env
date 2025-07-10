@@ -201,7 +201,8 @@
     },
     "custom/power": {
         "format" : " ",
-        "on-click" : "~/.local/bin/power-menu"
+        "on-click" : "~/.local/bin/power-menu",
+        "tooltip": false
     },
         "custom/separator": {
         "format": " | ",
