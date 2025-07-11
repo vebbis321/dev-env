@@ -1,0 +1,5 @@
+vim.keymap.set("n", "<leader>ip", function()
+	vim.cmd.new()
+	vim.cmd.term()
+	vim.cmd.windcmd("L")
+end)

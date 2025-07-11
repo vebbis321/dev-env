@@ -35,14 +35,10 @@ return {
 		local keymap = vim.keymap
 		keymap.set("n", "<C-Space>", "<Plug>VimwikiToggleListItem<CR>0")
 
-		local templates = require("config.plugins_custom.vimwiki_templates")
+		local templates = require("config.modules.markdown_templates")
 
 		vim.api.nvim_create_user_command("Diary", function()
 			templates.open_diary()
-		end, {})
-
-		vim.api.nvim_create_user_command("Recall", function()
-			templates.open_recall()
 		end, {})
 
 		keymap.set("n", "<Leader>w<leader>w", ":Diary<CR>", { noremap = true, silent = true })
