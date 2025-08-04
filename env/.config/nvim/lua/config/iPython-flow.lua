@@ -32,7 +32,7 @@ local function send_line_or_visual()
 	end
 end
 
-local function send_paragraph()
+local function send_block()
 	local start = vim.fn.search("^\\s*$", "bnW") + 1
 	local finish = vim.fn.search("^\\s*$", "nW") - 1
 	local bufnr = vim.api.nvim_get_current_buf()
@@ -52,4 +52,4 @@ local function send_paragraph()
 end
 
 vim.keymap.set({ "n", "v" }, "<leader>sc", send_line_or_visual)
-vim.keymap.set({ "n", "v" }, "<leader>sp", send_paragraph)
+vim.keymap.set({ "n", "v" }, "<leader>sb", send_block)

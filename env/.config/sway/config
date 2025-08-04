@@ -21,16 +21,13 @@ set $menu $rofi_cmd -show drun -show-icons
 output * bg "$HOME/Pictures/wallpaper.png" fill
 
 ### Idle configuration
-exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-3600} ST=${ST:-60} && \
-    swayidle -w \
-        timeout $LT 'swaylock -f' \
-        timeout $((LT + ST)) 'swaymsg "output * power off"' \
-                      resume 'swaymsg "output * power on"'  \
-        timeout $ST 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power off"' \
-             resume 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power on"'  \
-        before-sleep 'swaylock -f' \
-        lock 'swaylock -f' \
-        unlock 'pkill -xu "$USER" -SIGUSR1 swaylock'
+set $idle_timeout 3600
+
+exec swayidle -w \
+      timeout $idle_timeout 'swaylock -f' \
+      timeout $((idle_timeout + 5)) 'swaymsg "output * power off"' \
+           resume 'swaymsg "output * power on"' \
+      before-sleep 'swaylock -f'
 
 ### Input configuration
 input "type:keyboard" {
