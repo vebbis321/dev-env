@@ -20,14 +20,15 @@ set $menu $rofi_cmd -show drun -show-icons
 # background
 output * bg "$HOME/Pictures/wallpaper.png" fill
 
-### Idle configuration
-set $idle_timeout 3600
+# Set timeouts in seconds for clarity
+set $lock_timeout 3600        # 1 hour
+set $power_off_timeout 3605   # 1 hour and 5 seconds
 
 exec swayidle -w \
-      timeout $idle_timeout 'swaylock -f' \
-      timeout $((idle_timeout + 5)) 'swaymsg "output * power off"' \
-           resume 'swaymsg "output * power on"' \
-      before-sleep 'swaylock -f'
+     timeout $lock_timeout 'swaylock -f' \
+     timeout $power_off_timeout 'swaymsg "output * power off"' \
+          resume 'swaymsg "output * power on"' \
+     before-sleep 'swaylock -f'
 
 ### Input configuration
 input "type:keyboard" {
