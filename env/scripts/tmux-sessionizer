@@ -11,6 +11,13 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
+
+if [[ $selected =~ (code|latex) ]]; then
+    folder_nanme=${BASH_REMATCH[0]}
+    old_selected_name=$selected_name
+    selected_name="$folder_nanme-$old_selected_name"
+fi
+
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
