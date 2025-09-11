@@ -7,6 +7,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export DEV_ENV="$HOME/repos/bash/dev-env"
+export BROWSER=brave-browser
 
 # ssh
 # Find the first non-.pub private key in ~/.ssh
@@ -37,6 +38,7 @@ source /usr/share/fzf/shell/key-bindings.zsh
 #alias
 alias nv='nvim'
 alias p='python3'
+alias uxplay='uxplay -p -vs waylandsink'
 
 # funcions / key key-bindings
 bindkey -s '^f' 'tmux-sessionizer^M'
