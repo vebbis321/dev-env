@@ -43,3 +43,7 @@ alias uxplay='uxplay -p -vs waylandsink'
 # funcions / key key-bindings
 bindkey -s '^f' 'tmux-sessionizer^M'
 
+# pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
